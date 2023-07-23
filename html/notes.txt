@@ -1,0 +1,72 @@
+2 types of HTML elements:
+- Non-replaced: usually have closing tags and dictate how the content between the tags should be marked up
+- Replaced and void: usually without a closing tag, the element becomes something else (e.g. image, form UI element,
+  etc.)
+
+The function of HTML elements is to describe what the content is - not to style it.
+
+Essentials for every HTML page:
+- Type of document
+- Human language
+- Character set
+- Title
+
+Always add <!DOCTYPE html> as a first line - tells the browser to use standards mode (not quirks mode)
+Skeleton:
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+    </head>
+    <body>
+    </body>
+</html>
+
+The head section contains all the metadata for a site. ALWAYS include:
+- character set
+- title
+- viewport settings
+
+Always use UTF-8 encoding (it's the standard required for HTML5)
+<meta charset="utf-8" />
+- the '/' at the end of the tag is a classic way of indicating that the tag is has no closing tag
+
+Should always use the viewport meta tag.
+<meta name="viewport" content="width=device-width" />
+
+Metadata that should be included outside of the <meta> tags:
+- CSS
+    - <link> with 'rel' attribute set to 'stylesheet' (preferred)
+    - include the CSS directly within the head within opening and closing <style> tags
+    <link rel="stylesheet" href="styles.css">
+    - 'type="text/css"' is unnecessary! (unless using something other than css)
+    - custom properties can be declared in the <head> <style> block:
+    <style>
+        :root {
+            --theme-color: #226DAA;
+        }
+    </style>
+
+While styles can go in the body, they're better in the head for performance.
+
+- Favicon
+    - the little icon appearing in the browser tab
+    - when not declared, browser tries to find 'favicon.ico' in the top-level directory
+    - <link> allows you to use a different file name and location:
+<link rel="icon" sizes="16x16 32x32 48x48" type="image/png" href="/images/mlwicon.png" />
+    - which means use icon specified in scenarios where 16/32/48px makes sense
+    - size can be 'any' for scalable icons or a space-separated list of widthXheight values (must be multiples of 16, x
+    or X)
+    - extras for apple:
+<link rel="apple-touch-icon" sizes="180x180" href="/images/mlwicon.png" />
+<link rel="mask-icon" href="/images/mlwicon.svg" color="#226DAA" />
+    - apple-touch-icon is for iOS devices when a site is added to the home screen
+    - you can specify multiple icons with different sizes for different devices
+    - mask-icon is used for pinned tabs on macOS Safari - icon should be monochrome SVG colored using 'color' attribute
+    - be consistent in icon usage across a website
+
+- Alternate versions
+    - used to identify translations or alternate representations of the site
+<link rel="alternate" href="https://www.machinelearningworkshop.com/fr/" hreflang="fr-FR" />
+<link rel="alternate" href="https://www.machinelearningworkshop.com/pt/" hreflang="pt-BR" />
+    - when using 'alternate' for a translation, the 'hreflang' attribute must be set
+
