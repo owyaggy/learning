@@ -33,7 +33,7 @@ Always use UTF-8 encoding (it's the standard required for HTML5)
 Should always use the viewport meta tag.
 <meta name="viewport" content="width=device-width" />
 
-Metadata that should be included outside of the <meta> tags:
+Metadata that should be included outside the <meta> tags:
 - CSS
     - <link> with 'rel' attribute set to 'stylesheet' (preferred)
     - include the CSS directly within the head within opening and closing <style> tags
@@ -69,4 +69,32 @@ While styles can go in the body, they're better in the head for performance.
 <link rel="alternate" href="https://www.machinelearningworkshop.com/fr/" hreflang="fr-FR" />
 <link rel="alternate" href="https://www.machinelearningworkshop.com/pt/" hreflang="pt-BR" />
     - when using 'alternate' for a translation, the 'hreflang' attribute must be set
+    - can also define alternate URI for an RSS feed when 'type' is set to 'application/rss+xml' or
+    'application/atom+xml'.
+<link rel="alternate" type="application/x-pdf" href="https://machinelearningworkshop.com/mlw.pdf" />
 
+- Canonical versions
+    - used to identify the authoritative version of a site if there are multiple translations or versions
+    - use 'rel="canonical"'
+    - include the canonical URL on all translated pages and on the home page
+<link rel="canonical" href="https://www.machinelearning.com" />
+
+- Scripts
+    - the default is JavaScript, use 'type' attribute if anything else, or 'type="module"' for a JS module
+    - the <script> tag can be used to encapsulate code or download external file
+    - ensure elements exist before the script referencing them is encountered! for this reason, it may make sense to
+    include <script> at the bottom of the <body> rather than in the <head>
+    - JS is render-blocking, meaning if it can't be run, the rest of the website won't load
+    - reduce the blocking nature of JS download and execution using the attributes 'defer' and 'async'
+    - 'defer' means rendering not blocked during download and JS executed after rest of document rendered
+    - 'async' is the same, except rendering is paused while JS executes
+    - example: <script src="js/switch.js" defer></script>
+    - 'async' and 'defer' only valid on external scripts
+
+- Base
+    - <base> allows setting default URL and target, with 'href' attribute defining base URL for all relative links
+    - 'target' attribute sets where the links should open
+        - default '_self' opens files in same context as current document
+        - '_blank' opens every link in a new window
+        - '_parent' of current content (maybe same as self if opener not an iframe)
+        - ''
