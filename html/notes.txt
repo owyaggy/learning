@@ -97,4 +97,89 @@ While styles can go in the body, they're better in the head for performance.
         - default '_self' opens files in same context as current document
         - '_blank' opens every link in a new window
         - '_parent' of current content (maybe same as self if opener not an iframe)
-        - ''
+        - '_top' opens in same browser tab, but popped out of current context to take entire tab
+    - usually devs add 'target' attribute to the few links they want to open in a new window on the links themselves
+    - drawback: anchor links are resolved with <base>
+        - <a href="#ref"> effectively converted to <a target="_top" href="https://machinelearningworkshop.com#ref">
+    - can only be one <base> element in a document
+    - should come before any relative URLs are used, including script and stylesheet references
+
+HTML comments is anything between <!-- and -->
+Use JS or CSS comments in script or style blocks, as necessary
+
+Meta tags
+2 main types: pragma directives and named meta types
+- both must include 'content' attribute defining content for the type of metadata listed
+
+Pragma directives
+- most common is the 'refresh' directive
+<meta http-equiv="refresh" content="60; https://machinelearningworkshop.com/regTimeout" />
+- refreshes every 60 seconds but DON'T use it! because why would you???? terrible for users and especially accessibility
+- good practice is to make sure user has enough time to read page, a link to hasten the process, and maybe can cancel
+
+- most useful pragma directive: 'content-security-policy'
+- content policies specify allowed server origins and script endpoints, helping against cross-site scripting attacks
+<meta http-equiv="content-security-policy" content="default-src https:" />
+
+Named meta tags
+- include 'name' attribute for name of metadata
+- also requires 'content' attribute
+- probably want to include 'description' and 'theme-color' but not 'keywords'
+
+- 'description' value is super important for SEO, often what's displayed under page title in search results, often
+  default description of bookmarked pages
+
+- you can tell search engines not to index your site using the 'robots' named meta tag:
+<meta name="robots" content="noindex, nofollow" />
+- should work, but no law requires bots to listen
+- don't need anything to specifically allow indexing
+
+- 'theme-color' defines a color to customize the browser interface
+- especially useful for progressive web apps
+    - can be included in the required manifest file of PWAs instead, but defining in HTML might be faster
+- example: (sets theme color to blue)
+<meta name="theme-color" content="#226DAA" />
+- can include 'media' attribute enabling setting of different theme colors based on media queries
+- this is the only meta tag where you might have more than one of the same (for different media queries)
+
+- if including multiple named metas for legacy browsers, legacy should come after newer values
+
+Open Graph: allows you to control how social media sites display links to your content
+- can customize an image and site title and description for social media sites
+- Open Graph meta tags have two attributes each:
+    - 'property' attribute' instead of 'name' and the 'content' for that property
+- example:
+<meta property="og:title" content="Machine Learning Workshop" />
+<meta property="og:description" content="School for Machines Who Can't Learn Good and Want to Do Other Stuff Good Too" />
+<meta property="og:image" content="http://www.machinelearningworkshop.com/image/all.png" />
+<meta property="og:image:alt" content="Black and white line drawing of refrigerator, french door refrigerator, range, washer, fan, microwave, vaccuum, space heater and air conditioner" />
+- the image URL needs to be an absolute URL
+- can provide a canonical URL with 'og:url'
+- different sites might have their own similar syntax: (not necessarily following Open Graph protocol)
+- example for Twitter:
+<meta name="twitter:title" content="Machine Learning Workshop" />
+<meta name="twitter:description" content="School for machines who can't learn good and want to do other stuff good too" />
+<meta name="twitter:url" content="https://www.machinelearningworkshop.com/?src=twitter" />
+<meta name="twitter:image:src" content="http://www.machinelearningworkshop.com/image/all.png" />
+<meta name="twitter:image:alt" content="27 different home appliances" />
+<meta name="twitter:creator" content="@estellevw" />
+<meta name="twitter:site" content="@perfmattersconf" />
+- can provide different values for 'og:image', 'og:title', and 'og:description' based on the parameter of the URL
+
+Customize application icons if site is added as a bookmark, added to a home screen, etc.:
+<link rel="apple-touch-startup-image" href="icons/ios-portrait.png" media="orientation: portrait" />
+<link rel="apple-touch-startup-image" href="icons/ios-landscape.png" media="orientation: landscape" />
+
+You can use meta tags to tell the browser that a site is web-app capable (can stand on its own without UI like a back
+button)
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+
+You can customize the name of your site's app icon if it's saved to a home screen:
+<meta name="apple-mobile-web-app-title" content="MLW" />
+<meta name="application-name" content="MLW" />
+- these two tags could be replaced by 'short_name: MLW' in a webmanifest file
+- a manifest file can prevent an unwieldy header full of <link> and <meta> tags
+- manifest files are usually called 'manifest.webmanifest' or 'manifest.json'
+- then use '<link>' tag:
+<link rel="manifest" href="/mlw.webmanifest" />
