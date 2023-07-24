@@ -183,3 +183,10 @@ You can customize the name of your site's app icon if it's saved to a home scree
 - manifest files are usually called 'manifest.webmanifest' or 'manifest.json'
 - then use '<link>' tag:
 <link rel="manifest" href="/mlw.webmanifest" />
+
+Semantic HTML
+There's a big difference between using only <div> and <span> versus descriptive <header>, <footer>, <main>, and <nav>
+tags. The latter is significantly better for accessibility.
+You can also use the 'role' attribute to make non-semantic tags semantic, with roles like 'banner', 'heading', and
+'navigation'. However, the implicit role (e.g. in tags like <header>) is preferable.
+
