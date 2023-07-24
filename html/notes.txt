@@ -260,3 +260,89 @@ const switchViaSelector = document.querySelector("#switch");
     </li>
   </ul>
 </fieldset>
+
+- 'id' can also be used for accessibility
+- a <section> tag that contains a <h2> tag could have an 'aria-labelledby' attribute whose value matches the 'id' of the
+  <h2> tag
+    - then the accessible name for that section will be the contents of the <h2> tag
+- 'aria-*' states and properties that take as their value a space-separated 'id' reference list:
+    - 'aria-labelledby'
+        - has precedence over <label>, <label> text not heard unless 'aria-labelledby' attribute includes id of label
+    - 'aria-describedby'
+    - 'aria-details'
+    - 'aria-owns'
+    - 'aria-activedescendant'
+        - identifies currently focused descendant element
+        - only takes a single 'id' reference
+            - of the single element that has focus (only one at a time)
+
+Classes
+- classes only matter for targeting with CSS and JS (don't affect HTML)
+- class attribute takes a space-separated list of case-sensitive classes as its value
+- semantic HTML often makes class names redundant
+- targeting by class name ('document.getElementsByClassName()') versus targeting by attributes/page structure
+  ('document.querySelectorAll()') difference:
+    - former returns live node list
+    - latter returns static node list
+    - difference is live list recognizes new changes in DOM
+
+'style'
+- the 'style' attribute is better used to test things quickly
+- best practice is to use external style sheet(s)
+
+Focus
+- keyboard users can hit tab to cycle between elements
+- some elements are not capable of receiving focus by default
+- whether an element can receive focus and the order of elements can be modified using the 'tabindex' attribute
+- 'tabindex' takes as its value an integer (in quotes, by convention)
+    - a negative integer (convention: -1) makes an element capable of receiving focus
+        - but doesn't add it to tabbing sequence
+    - a value of "0" makes the element focusable and reachable via tabbing
+        - adds it to default tab order (in source code order)
+    - a value of 1 or more puts element in a prioritized focus sequence
+        - not recommended
+        - if a document includes elements with a 'tabindex' of 1 or more, they're included in a separate tab sequence
+        - bad tabbing sequences SUCK! avoid them! terrible for usability and maintenance
+
+Role
+- the 'role' attribute is used to provide semantic meaning to content
+- some UI widgets (like tablists, e.g. the way browser tabs work) have no native HTML equivalent
+    - 'role' can be used to add semantic meaning with values of 'tab', 'tablist', and 'tabpanel'
+    - ex: <button role="tab">, which lets the screen reader know the function is different than a regular button
+- 'role' doesn't change browser behavior (which is why semantic elements is better!)
+- 'role' is great for letting a screen reader know when a non-semantic element has been retrofitted into a semantic
+  element's role
+
+contenteditable
+- if 'contenteditable' attribute is 'true', element is:
+    - editable
+    - focusable
+    - added to tab order as if 'tabindex="0"'
+- 'contenteditable' is an enumerated attribute supporting 'true' and 'false' values
+    - default value 'inherit' if attribute not present or has invalid value
+- so these are equivalent:
+<style contenteditable>
+<style contenteditable="">
+<style contenteditable="true">
+- toggle between states by querying value of the 'HTMLElement.isContentEditable' readonly property
+- or by setting 'editor.contentEditable' to 'true', 'false', or 'inherit'
+const editor = document.getElementById("myElement");
+if(editor.contentEditable) {
+  editor.setAttribute("contenteditable", "false");
+} else {
+  editor.setAttribute("contenteditable", "");
+}
+- global attributes can be added to all elements, even <style>
+
+Custom attributes
+- you can create your own global attributes
+    - just need to add 'data-' prefix
+        - followed by a lowercase series of letters not starting with 'xml' and not containing ':'
+- access their values through DOM using 'dataset[name]' on the element with the custom attribute
+- you can use 'getAttribute()' using full attribute name, or simpler way using 'dataset' property:
+    - el.dataset[name]; // value of custom attribute data-name in element stored in el
+- 'dataset' property returns a 'DOMStringMap' object of each element's 'data-' attributes
+    - don't need to know all the custom attributes to access their names and values:
+for (let key in el.dataset) {
+  customObject[key] = el.dataset[key];
+}
