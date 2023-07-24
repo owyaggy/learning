@@ -346,3 +346,49 @@ Custom attributes
 for (let key in el.dataset) {
   customObject[key] = el.dataset[key];
 }
+
+- remember that h1 elements get smaller the more elements they're nested in by default browser behavior
+A section with a heading that's ~not~ a landmark (not read by screen readers):
+<section id="about">
+    <h2>What you'll learn</h2>
+    <p>...</p>
+</section>
+
+A section with a heading that ~is~ a landmark (<h2> read by screen readers):
+<section id="about" aria-labelledby="about_heading">
+    <h2 id="about_heading">What you'll learn</h2>
+    <p>...</p>
+</section>
+
+- too many landmarks can be disorienting!
+
+Quotes and citations
+- elements: <blockquote>, <q>, and <cite>
+    - good practice to use <cite> for actual resources
+    - <cite> can be the title of a source
+        - whether mentioned in passing or quoted or referenced
+        - the content of <cite> is the work, not the author
+        - <cite> has no implicit role
+        - <cite> should get its accessible name from its contents
+            - don't include an 'aria-label'
+    - <blockquote> closing tag is ~required~!
+        - unlike <p> closing tag, which is best practice but not strictly necessary
+- also a 'cite' attribute
+    - provides more information for search
+    - machine-readable, not shown to user
+    - valid on <q> and <blockquote>
+    - takes as its value the URL for the source document/message from which quote is derived
+- <br> should not be used to separate paragraphs
+    - use it just as a line break (in an address, for example)
+- adding the 'lang' attribute to <p> elements helps with the accent of screen readers
+
+HTML entities
+- since < is used in HTML, escape it using '&lt;' or '&#60;'
+- 4 reserved HTML entities: '<', '>', '&', '"'
+    - respective character references: '&lt;', '&gt', '&amp;', '&quot;'
+- commonly used:
+    - '&copy;' for ©
+    - '&trade;' for ™
+    - '&nbsp;' for non-breaking space
+        - useful when including a space between characters while preventing line break from occurring there
+- there's an encoded equivalent beginning with '&#' for every character
