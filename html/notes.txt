@@ -205,3 +205,58 @@ Good semantic HTML tags:
 - <section>
 - <address>: contact info for individuals or organizations
 - <h1>-<h6>: headings, nest headings without skipping levels, they appear smaller in nested sections
+
+HTML attributes
+- attribute values only NEED to be in quotes if they contain spaces or special characters
+- best practice to always use quotes though!
+- case sensitivity is pretty loose, but anything that you define is case-sensitive
+
+- if a boolean attribute is present, it's true
+- boolean values can be set to anything (including false) and will resolve as true
+    - but not all attributes are boolean attributes
+- when toggling a value true/false in JS, add and remove attribute rather than toggling value
+
+- enumerated attributes have default values, which depend on the attribute
+- enumerated attributes can be set to false
+- invalid or missing values for enumerated attributes cause the default value to be used
+- or if an enumerated attribute is missing, the default value is used
+
+- global attributes can be set on any html element, although some have no effect on certain elements
+
+- the 'id' attribute defines a unique identifier for an element
+- 'id' values can be anything without a space, but normal variable conventions are good practice
+- 'id's should be unique to the document
+
+- fragment identifiers ('href="#reg"') cause scrolling to the section identified by 'id="reg"'
+- 'href="#top"' or 'href="#"' scroll to the top of the page
+- the fragment identifier is not sent to the server
+
+- css selectors: target a section using an id selector like '#feedback'
+- or, for less specificity, a case-sensitive attribute selector, like '[id="feedback"]'
+
+- JS for targeting an element with 'id="switch"': (2 options)
+const switchViaID = document.getElementById("switch");
+const switchViaSelector = document.querySelector("#switch");
+    - or 'querySelectorAll()'
+
+- <label> element has a 'for' attribute that takes as its value the 'id' of the form control with which it is associated
+- each label can be associated with exactly one form control (and should)
+- a form control may have more than one associated label
+- if form control nested between <label> opening and closing tags, 'for' and 'id' attributes aren't required
+    - this is an 'implicit' label
+- when including radio buttons, as the labels describe the value of the radio buttons, we encompass all the same-named
+  buttons in a <fieldset> with the <legend> being the label for the entire set
+- Example:
+<fieldset>
+  <legend>Question 5: Who is an aspiring load balancer?</legend>
+  <ul>
+    <li>
+      <input type="radio" name="q5" value="blendan" id="q5blendan">
+      <label for="q5blendan">Blendan Smooth</label>
+    </li>
+    <li>
+      <input type="radio" name="q5" value="hoover" id="q5hoover">
+      <label for="q5hoover">Hoover Sukhdeep</label>
+    </li>
+  </ul>
+</fieldset>
