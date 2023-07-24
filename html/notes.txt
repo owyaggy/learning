@@ -189,4 +189,19 @@ There's a big difference between using only <div> and <span> versus descriptive 
 tags. The latter is significantly better for accessibility.
 You can also use the 'role' attribute to make non-semantic tags semantic, with roles like 'banner', 'heading', and
 'navigation'. However, the implicit role (e.g. in tags like <header>) is preferable.
+Role is better than using multiple 'id' or 'class' attributes for <div> tags.
+The goal is building a meaningful accessibility object model (AOM) for screen readers and other assistive technology to
+use.
 
+Ultimately, using semantic HTML results in writing less code.
+
+Good semantic HTML tags:
+- <header>
+- <footer>
+- <nav>
+- <main>: only 1 per page
+- <aside>: content related to main content, often a sidebar or call-out box, implicit 'role' is 'complementary'
+- <article>: posts/sections nested in main - self-contained and independently reusable content
+- <section>
+- <address>: contact info for individuals or organizations
+- <h1>-<h6>: headings, nest headings without skipping levels, they appear smaller in nested sections
