@@ -392,3 +392,33 @@ HTML entities
     - '&nbsp;' for non-breaking space
         - useful when including a space between characters while preventing line break from occurring there
 - there's an encoded equivalent beginning with '&#' for every character
+
+Links
+- <a> can also be used to download files or to send an email, even including subject and email body
+- absolute URLs include a protocol (like 'https://')
+    - the protocol '//' is an implicit protocol meaning 'same as current protocol'
+- relative URLs don't include protocol and are 'relative' to current file
+    - example: <a href="../attributes/">Attributes</a>
+- href for mail: 'mailto:'
+- href for calls: 'tel:'
+- populated href for an email link:
+<a href="mailto:?subject=Join%20me%21&body=You%20need%20to%20show%20your%20human%20that%20you%20can%27t%20be%20owned%21%20Sign%20up%20for%20Machine%20Learning%20workshop.%20We%20are%20taking%20over%20the%20world.%20http%3A%2F%2Fwww.machinelearning.com%23reg
+">Tell a machine</a>
+    - '?' separates 'mailto:' and email address (if present) from query term
+    - within query, '&' to separate fields, '=' equate field name with value
+    - whole thing is percent-encoded
+- there are other types of URLs like blobs and data URLs
+- on sites with https it's possible to create and run app specific protocols with 'registerProtocolHandler()'
+- good to let users know when it's likely links will open in other applications
+    - text between opening/closing tags should tell user link type
+- CSS attribute selectors can be used to target styles by application type
+    - '[href^="mailto:"]', '[href^="tel:"]', and '[href$=".pdf"]'
+
+Downloads
+- 'download' attribute should be used when 'href' points to downloadable resource
+- value of 'download' attribute is suggested filename for resource
+- 'href' is the URL of the asset
+
+Browsing context
+- 'target' attribute defines browsing context for link navigation and form submission
+- k
