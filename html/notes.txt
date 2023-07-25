@@ -629,3 +629,43 @@ tbody tr:nth-of-type(odd) {background-color: rgba(0 0 0 / 0.1);}
 - tables are sized according to content by default (not responsive)
 - sorting is done through JS, but include 'aira-sort' attribute with enumerated value of sort direction on currently
   sorted column
+
+Forms
+- forms can be validated with only HTML
+    - turn off using 'novalidate' attribute on <form>
+    - or (more common) turn off using 'formnovalidate' attribute on a button
+
+form submission
+- forms submitted when user clicks submit button nested in form
+- when using <input> for buttons:
+    - 'value' is button's label, and displayed in button
+- when using <button>:
+    - label is text between opening/closing tags
+- examples:
+<input type="submit" value="Submit Form">
+<button type="submit">Submit Form</button>
+
+- by default, form data gets sent to current page
+    - change using 'action' attribute
+    - set 'action' to destination URL of data
+- 'method' attribute defines HTTP protocol of request (usually 'GET' or 'POST')
+    - 'GET' sends form data as parameter string of 'name=value' pairs appended to URL in 'action'
+    - 'POST' appends data to HTTP request body (ALWAYS use 'POST' for secure data)
+    - 'DIALOG' method:
+        - if <form method="dialog"> is within a <dialog>, submitting form closes <dialog>
+        - since this doesn't submit form, probably include the following to submit the data:
+            - 'formmethod="dialog"' and 'formnovalidate' on the submit button
+- by default, form data includes all form controls nested in <form> that have a 'name'
+    - 'form' attribute allows including additional form controls and omitting existing ones
+    - 'form' also supported on <fieldset>
+    - 'form' takes as its value the 'id' of the form the control is associated with
+        - not necessarily the one it's in
+        - means form controls don't need to be nested in <form>
+    - using 'form' attribute makes it possible to disassociate a form control from its form!
+- form buttons can have additional attributes:
+    - if buttons include
+        'formaction', 'formenctype', 'formmethod', 'formnovalidate', or 'formtarget'
+      the values set on the button activating submission take precedence over
+        'action', 'enctype', 'method', and 'target'
+      set on <form>
+- use 'name' on submit button to capture which button used to submit
