@@ -152,7 +152,7 @@ Open Graph: allows you to control how social media sites display links to your c
 <meta property="og:title" content="Machine Learning Workshop" />
 <meta property="og:description" content="School for Machines Who Can't Learn Good and Want to Do Other Stuff Good Too" />
 <meta property="og:image" content="http://www.machinelearningworkshop.com/image/all.png" />
-<meta property="og:image:alt" content="Black and white line drawing of refrigerator, french door refrigerator, range, washer, fan, microwave, vaccuum, space heater and air conditioner" />
+<meta property="og:image:alt" content="Black and white line drawing of refrigerator, french door refrigerator, range, washer, fan, microwave, vacuum, space heater and air conditioner" />
 - the image URL needs to be an absolute URL
 - can provide a canonical URL with 'og:url'
 - different sites might have their own similar syntax: (not necessarily following Open Graph protocol)
@@ -308,7 +308,7 @@ Role
 - the 'role' attribute is used to provide semantic meaning to content
 - some UI widgets (like tablists, e.g. the way browser tabs work) have no native HTML equivalent
     - 'role' can be used to add semantic meaning with values of 'tab', 'tablist', and 'tabpanel'
-    - ex: <button role="tab">, which lets the screen reader know the function is different than a regular button
+    - ex: <button role="tab">, which lets the screen reader know the function is different from a regular button
 - 'role' doesn't change browser behavior (which is why semantic elements is better!)
 - 'role' is great for letting a screen reader know when a non-semantic element has been retrofitted into a semantic
   element's role
@@ -513,3 +513,40 @@ Lists
 
 - bullets and numbering order can be controlled/reversed with HTML/CSS/both
 - even lists without bullets, like a to-do list or a navbar, can use HTML list elements
+
+Navigation
+- goal is intuitive travel between pages in the fewest clicks possible
+- "skip to content" links are great for accessibility
+    - allow users tabbing through content to skip repetitive links/headers/etc.
+    - since not always ideal for UI, nice to have a link that's hidden unless it has focus
+    - example:
+<a href="#main" class="skip-link button">Skip to main</a>
+    - linking to <main id="main">, with selector like
+.visually-hidden:not(:focus):not(:active)
+
+- if text is present that can act as a label, that's preferable to attribute text
+    - since only displayed text gets translated
+- if using 'aria-label', provide information that isn't visible
+    - otherwise use 'aria-labelledby'
+
+- links in navigation don't need to be in a list
+    - however, putting them in a list lets screen readers know how many items (therefore links) are present
+
+- including 2 identical widgets to show one is BAD!
+    - it's an anti-pattern (common response to recurring problem that's often ineffective or counterproductive)
+    - not because of the extra storage, but because it makes the design unpredictable and changes the tab order
+
+Breadcrumbs
+- show the user how they got to the current page
+- allows users to step back a level without using browser back button
+- should be classified as a <nav> element for semantics
+- accessible name like "breadcrumbs" differentiates it (in 'aria-label')
+- if current page is included in a breadcrumb (optional), it shouldn't be a link
+    - current page's <li> should include 'aria-current="page"'
+
+- some navigation is always present on wider screens and accessible via a menu on narrower ones
+    - only difference in the navigation widget is the presence of a close button
+- identify current page in nav using 'aria-current="page"'
+- navigation must appear homogeneously on every page
+
+- footers must appear homogeneously on every page
