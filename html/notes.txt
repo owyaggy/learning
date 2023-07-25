@@ -421,4 +421,48 @@ Downloads
 
 Browsing context
 - 'target' attribute defines browsing context for link navigation and form submission
-- k
+- 4 keywords: see descriptions in the <base> section
+- any term can be used
+- '_blank' opens links in a new tab
+    - this does mean a new tab will be opened every time the link is clicked, even if it's already been clicked
+    - prevent this with a tab context name
+    - instead of '_blank', use something like 'reg' (for 'registration')
+    - then every time the link is clicked, the 'reg' tab will be reloaded
+    - it will only be created once
+
+- 'rel' attribute defines relationship between linked resource and current document
+    - can have multiple space separated values
+    - seems like a major function is just semantics
+    - often tells the browser 'tips' for when/how to load a resource
+        - ex: preloading/fetching content
+    - 'nofollow' value tells spiders not to follow the link
+    - 'external' value indicates an external URL
+    - 'help' keyword indicates a link to context-sensitive help
+        - hovering over a link with this 'rel' value shows a help cursor
+        - use CSS 'cursor' property to get this cursor if not for a link
+    - 'prev' and 'next' values indicate links pointing to prev/next documents in a series
+- example usage:
+<a href="/fr/" hreflang="fr-FR" rel="alternate" lang="fr-FR">atelier d'apprentissage mechanique</a>
+<a href="/pt/" hreflang="pt-BR" rel="alternate" lang="pt-BR">oficina de aprendizado de máquina</a>
+
+Tracking link clicks
+- 'ping' attribute
+    - includes space-separated link of https URLs to be pinged if link clicked
+    - sends 'POST' request with body 'PING' to URLs listed as value of 'ping' attribute
+
+User experience
+- differentiate links from other content
+- give links context - their destination should be clear
+    - being more descriptive than 'click here' or 'more info' helps SEO!
+- include focus styles
+- content between <a> and </a> is link's default accessible name - should inform purpose/destination
+    - 'alt' description used instead if link content is image
+- don't nest focusable/clickable elements inside interactive elements, e.g. buttons/labels in links or vice versa
+
+Links and JS
+- 'links' property returns an 'HTMLCollection' matching 'a' and 'area' elements that have an 'href' attribute
+- example:
+let a = document.links[0]; // obtain the first link in the document
+a.href = 'newpage.html'; // change the destination URL of the link
+a.protocol = 'ftp'; // change just the scheme part of the URL
+a.setAttribute('href', 'https://machinelearningworkshop.com/'); // change the attribute content directly
