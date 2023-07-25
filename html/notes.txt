@@ -550,3 +550,82 @@ Breadcrumbs
 - navigation must appear homogeneously on every page
 
 - footers must appear homogeneously on every page
+
+Tables
+- they're not for arranging - use CSS grids instead!
+- best for presenting, comparing, sorting, calculating, or cross-referencing data
+
+- if table maintains a selection site, has 2-D navigation, or allows user to rearrange cell order, set 'role="grid"'
+- if rows of 'grid' can be expanded/collapsed, use 'role="treegrid"' instead
+
+- inside <table>:
+    - <thead>
+        - table header
+    - <tbody>
+        - table bodies
+    - <tfoot>
+        - table footers (optional)
+    - each of the three main elements is made up of <tr>, table rows
+    - rows contain:
+        - <th>
+            - table header cell
+            - has semantic meaning - implicit ARIA roles of 'columnheader' or 'rowheader'
+                - depending on value of enumerated 'scope' attribute
+                    - 'col', 'row', 'rowgroup', 'colgroup'
+        - <td>
+            - table data cell
+        - these cells contain all the data
+
+- additional features in the DOM:
+    - <caption>
+        - table caption
+    - <colgroup>
+        - column groups
+        - depending on whether <colgroup> has 'span' attribute, may contain nested table column (<col>) elements
+
+- table children, in order:
+    1. <caption>
+        - semantic element
+        - preferred method of giving table a name
+        - first element in <table> element
+        - alternatively use 'aria-label' or 'aria-labelledby' on <table> to provide accessible name as caption
+        - set <caption> location with CSS 'caption-side' property
+            - better practice than 'align' attribute
+    2. <colgroup>
+    3. <thead>
+    4. <tbody>
+    5. <tfoot>
+
+- table sectioning:
+    - 3 sections:
+        - table headers <thead>
+        - table bodies <tbody>
+        - table footers <tfoot>
+    - all optional, 0+ of each possible
+    - share same implicit 'rowgroup'
+    - each table row <tr> contains 1+ cells (<th> for table headers or <td> if not)
+
+- cell padding: space between content of cell and border
+    - set using CSS 'border-collapse' property
+- cell spacing: space between borders of adjacent cells
+    - set using CSS 'border-spacing' property
+
+- merge cells
+    - 'colspan' attribute merges across columns in a single row
+    - 'rowspan' attribute merges across rows
+        - placed on cell in top row
+    - value of 'colspan' or 'rowspan' is the number of cells to be merged
+
+- for complex tables, give the <th>s ids and reference those as values in the 'headers' attribute of <td>s
+    - 'headers' attribute also valid, though uncommon, on <th>
+
+- styling tables
+    - can use <colgroup> and its one descendant <col>
+    - use <colgroup> in <table> immediately after <caption> and before any table data
+    - use 'span' attribute if it spans more than one table
+    - an example of striped table CSS:
+tbody tr:nth-of-type(odd) {background-color: rgba(0 0 0 / 0.1);}
+
+- tables are sized according to content by default (not responsive)
+- sorting is done through JS, but include 'aira-sort' attribute with enumerated value of sort direction on currently
+  sorted column
