@@ -466,3 +466,50 @@ let a = document.links[0]; // obtain the first link in the document
 a.href = 'newpage.html'; // change the destination URL of the link
 a.protocol = 'ftp'; // change just the scheme part of the URL
 a.setAttribute('href', 'https://machinelearningworkshop.com/'); // change the attribute content directly
+
+Lists
+- <ol> ordered list
+    - <li> list item
+    - type of number defined in CSS with 'list-style-type' property or 'type' attribute
+    - three element-specific attributes:
+        - 'type'
+            - enumerated attribute
+            - sets numbering types
+            - 5 valid values:
+                - '1' for numbers (default)
+                - 'a' or 'A' for lower/uppercase letters
+                - 'i' or 'I' for lower/uppercase roman numerals
+            - 'list-style-type' property provides many more values
+            - overridden by 'list-style-type' property
+        - 'reversed'
+            - reverses order of numbers
+        - 'start'
+            - sets starting value
+            - default is 1
+- <ul> unordered list
+    - <li> list item
+- <li> list item
+    - must be direct child of <ul>, <ol>, or <menu>
+    - only 1 element-specific attribute:
+        - 'value'
+            - integer
+            - useful when <li> nested in <ol>
+            - overrides value of <ol>'s start if conflict
+- <dl> description list
+    - <dt> description term
+        - similar use to the key in a key-value pair
+        - each has at least one associated <dd>
+    - <dd> description detail
+        - similar use to the value in a key-value pair
+        - each has at least one associated <dt>
+    - often used for a glossary or displaying metadata (list of key-value pairs)
+    - can have <div> children each containing 1+ <dt> or <dd> or both
+    - can have <div>, <template>, or <script> children
+    - none of the <dl> elements has element-specific attributes
+- lists can be nested, but only within <li>
+    - only <li> can be child of <ul> or <ol>
+- forms
+    - lists of <option> elements make up content of <datalist>, <select>, and <optgroup> within a <select>
+
+- bullets and numbering order can be controlled/reversed with HTML/CSS/both
+- even lists without bullets, like a to-do list or a navbar, can use HTML list elements
