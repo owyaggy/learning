@@ -723,4 +723,41 @@ form submission
     - example of interactive element is a link; don't want clicking label to redirect
     - <label> should come before form control except for radio buttons and checkboxes (standard pattern, not required)
     - <label> provides accessible name for the form control it's associated with
-        - the individual checkbox or radio button
+        - just an individual checkbox or radio button
+    - label a group by putting all elements in a <fieldset> containing a <legend> providing label for group
+    - it's common practice to nest fieldsets (ex: groups of questions within larger form of questions)
+    - <fieldset> supports 'name', 'disabled', and 'form' attributes
+        - disabling a <fieldset>, nested form controls are disabled
+        - 'name' attribute can be used to access fieldset, but otherwise not very useful
+        - fieldset is not included in submitted data, just named form controls nested within
+
+- input types:
+    - 22 types of inputs:
+        - button, checkbox, color, date, datetime-local, email, file, hidden, image, month, number, password, radio,
+          range, reset, search, submit, tel, text, time, url, week
+    - 'file' input:
+        - type of file defined and limited by 'accept' attribute
+        - value of 'accept' attribute is comma-separated list of file extensions, a global type, or combo of both
+        - use 'audio/*' for sound files, 'video/*' for video files, and 'image/*' for image files
+    - user microphone and camera:
+        - use 'capture' attribute
+            - set to 'user' for user-facing input devices, 'environment' for phone's back camera/microphone
+            - using without a value allows user to pick input device
+<label for="avatar">A recent photo of yourself:</label>
+<input type="file" capture="user" accept="image/*" name="avatar" id="avatar">
+
+- built-in validation: (using only html and css)
+    - CSS selectors:
+        - ':required' and ':optional' select elements based on value of 'required' attribute
+        - ':default' selects any checkbox/radio button with the 'checked' attribute
+        - ':enabled' and ':disabled' select based on presence of 'disabled' attribute in interactive elements
+        - ':read-write' selects elements with 'contenteditable' set and form controls that are editable by default
+        - ':read-only' selects a writable element with the 'readonly' attribute set
+        - ':valid', ':invalid', ':in-range', and ':out-of-range' toggle depending on state
+    - error messages from errors based on 'required', 'pattern', 'min', 'max', and 'type' attributes come at submission
+        - submission is blocked if any 'validityState' properties return 'true'
+            - error message is displayed in first incorrect form control
+            - that form control given focus
+        - if a 'number'/'date'/'time' value is below/above 'min'/'max' control is ':out-of-range' (and ':invalid')
+            - given
+
