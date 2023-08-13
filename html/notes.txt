@@ -669,3 +669,28 @@ form submission
         'action', 'enctype', 'method', and 'target'
       set on <form>
 - use 'name' on submit button to capture which button used to submit
+
+- submission:
+    - name of a form control is value of 'name' attribute
+    - value of form control comes from contents of 'value' attribute
+        - or value entered/picked by user
+        - value of a <textarea> is inner text
+        - value of a <select> is selected <option>'s 'value' attribute
+            - or selected option's inner text if 'value' attribute not present
+    - all names and values of all form controls with a 'name' are sent
+        - except non-selected checkboxes, non-selected radio buttons, and all buttons besides one used to submit
+    - if form control has a name, but no value was entered or defaulted, form control's 'name' gets submitted with an
+      empty value
+
+- including a value is optional
+    - often a bad idea when asking user to enter info
+    - for <input>s where user can't edit value, should always include value
+        - including when type is 'hidden', 'radio', 'checkbox', 'submit', 'button', or 'reset'
+- using unique 'name's is recommended except for checkboxes and radio buttons
+
+- radio buttons:
+    - usually only one can be selected at a time because all in a group have the same 'name'
+    - different groups of radio buttons should have different 'name's
+    - 'name' and 'value' of selected radio button are submitted with form
+    - should possess relevant and usually unique value
+    - 'checked' attribute selects a radio button in a group by default
