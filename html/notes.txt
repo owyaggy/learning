@@ -722,3 +722,5 @@ form submission
     - don't include interactive elements in explicit label, or interactive elements besides form control in implicit one
     - example of interactive element is a link; don't want clicking label to redirect
     - <label> should come before form control except for radio buttons and checkboxes (standard pattern, not required)
+    - <label> provides accessible name for the form control it's associated with
+        - the individual checkbox or radio button
