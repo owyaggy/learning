@@ -694,3 +694,31 @@ form submission
     - 'name' and 'value' of selected radio button are submitted with form
     - should possess relevant and usually unique value
     - 'checked' attribute selects a radio button in a group by default
+    - include 'required' attribute on at least one radio button in a group if a selection in the group is required
+        - always indicate in <legend> if a form control is required
+
+- checkboxes:
+    - all checkboxes in a group can have same name
+    - only selected checkboxes have 'name' and 'value' submitted
+    - if 'value' not included on a checkbox it defaults to 'on'
+    - use 'required' attribute to require a checkbox
+        - only affects that one
+        - always indicate when a checkbox is required
+
+- labels and fieldsets:
+    - every form control must have a label
+    - also label groups of form controls
+    - individual <input>, <select>, and <textarea> elements labeled with <label>
+    - groups of form controls labeled by contents of <legend> or <fieldset> grouping them
+    - <button> gets accessible name from content or value
+    - explicitly associate a form control with a label:
+        - include 'for' attribute on the <label>
+        - value of 'for' is 'id' of form control it's associated with
+        - benefits:
+            - labels become hit areas, making it easier to select form control
+    - implicitly associate a form control with a label:
+        - include form control between opening and closing <label> tags
+        - same accessibility as explicit association, but no 'id', so no styling hook
+    - don't include interactive elements in explicit label, or interactive elements besides form control in implicit one
+    - example of interactive element is a link; don't want clicking label to redirect
+    - <label> should come before form control except for radio buttons and checkboxes (standard pattern, not required)
