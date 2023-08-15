@@ -758,6 +758,6 @@ form submission
         - submission is blocked if any 'validityState' properties return 'true'
             - error message is displayed in first incorrect form control
             - that form control given focus
-        - if a 'number'/'date'/'time' value is below/above 'min'/'max' control is ':out-of-range' (and ':invalid')
-            - given
+        - if a 'number'/'date'/'time' value is below/above 'min'/'max' then control is ':out-of-range' (and ':invalid')
+            - throws 'validityState.rangeOverflow' or 'validityState.rangeUnderflow' error
 
